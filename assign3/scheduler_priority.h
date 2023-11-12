@@ -1,7 +1,7 @@
 /**
 * Assignment 3: CPU Scheduler
  * @file scheduler_priority.h
- * @author ??? (TODO: your name)
+ * @author Julian Rangel & Nick F Andrew
  * @brief This Scheduler class implements the Priority scheduling algorithm.
  * @version 0.1
  */
@@ -17,6 +17,8 @@
 class SchedulerPriority : public Scheduler {
 private:
     // TODO: add necessary member variables here for your implementation
+    int current_time;
+    vector<PCB> processes;
 
 public:
     /**

@@ -1,7 +1,7 @@
 /**
 * Assignment 3: CPU Scheduler
  * @file scheduler_rr.h
- * @author ??? (TODO: your name)
+ * @author Juliann Rangel & Nick F Andrew
  * @brief This Scheduler class implements the RoundRobin (RR) scheduling algorithm.
  * @version 0.1
  */
@@ -16,6 +16,11 @@
 class SchedulerRR : public Scheduler {
 private:
     // TODO: add necessary member variables here for your implementation
+    int current_time;
+    int quantum;
+    vector<PCB> processes;
+    vector<int> remainingBurst;
+    vector<int> turnaroundTime;
 
 public:
     /**
