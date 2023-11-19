@@ -11,13 +11,29 @@
 
 // Define the data type of the buffer items
 typedef int buffer_item;
-
+#include <vector>
+#include <mutex>
+#include <condition_variable>
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+using namespace std;
 /**
  * @brief The bounded buffer class. The number of items in the buffer cannot exceed the size of the buffer.
  */
 class Buffer {
 private:
     // TODO: Add your implementation of the buffer class here
+    vector <buffer_item> buffer;
+    int count;
+    int size;
+    int in;
+    int out;
+    mutex mtx;
+    condition_variable notFull;
+    condition_variable notEmpty;
+
 
 public:
     /**
