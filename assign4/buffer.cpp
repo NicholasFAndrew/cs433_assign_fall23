@@ -21,49 +21,41 @@ using namespace std;
 // TODO: Add your implementation of the buffer class here
 
 Buffer::Buffer(int size){
+    buffer[0] = 0;
     this->size = size;
     this->count = 0;
-    this->in = 0;
-    this->out = 0;
-    buffer.resize(size);
+    this->front = 0;
+    this->last = 0;
+    
 }
 
 Buffer::~Buffer(){
     while(!is_empty()){
-        buffer_item b = buffer[buffer.front()];
+        buffer_item b = buffer[front];
         remove_item(&b);
     }
 }
 
 
 bool Buffer::insert_item(buffer_item item){
-    unique_lock<mutex> lock(mtx);
-    while(is_full()){
-        notFull.wait(lock);
+    if(!is_full()){
+        last = (last + 1) % get_size();
+        count++;
+        return true;
     }
 
-    buffer[in] = item;
-    in = (in + 1) % size;
-    count++;
-
-    notEmpty.notify_all();
-
-    return true; 
+    return false;
 }
 
 bool Buffer::remove_item(buffer_item *item){
-    unique_lock<mutex> lock(mtx);
+    if(!is_empty()){
+        *item = buffer[front];
+        front = (front + 1) % get_size();
 
-    while(is_empty()){
-        notEmpty.wait(lock);
+        return true;
     }
 
-    *item = buffer[out];
-    out = (out + 1) % size;
-    count--;
-
-    notFull.notify_all();
-    return true;
+    return false;
 }
 
 int Buffer::get_size(){
@@ -83,14 +75,15 @@ bool Buffer::is_full(){
 }
 
 void Buffer::print_buffer(){
-    unique_lock <mutex> lock(mtx);
-
-    cout << "Buffer: [";
-    for(int i = 0 ; i < count; i++){
-        cout << buffer[(out + i) % size];
-        if(i < count - 1){
-            cout << ", ";
+   if(is_empty()){
+        cout << "[empty]" << endl;
+   }else{
+        int temp = front;
+        cout << "Buffer [";
+        for(int i = 0; i < count; i++){
+            cout << buffer[temp] << " ";
+            temp = (temp + 1) % buffer_size;
         }
-    }
-    cout << "]" << endl;
+        cout << "]" << endl;
+   }
 }
