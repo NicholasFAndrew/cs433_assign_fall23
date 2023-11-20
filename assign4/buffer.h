@@ -32,8 +32,6 @@ private:
     int size;
     int front;
     int last;
-    
-
 
 public:
     /**
