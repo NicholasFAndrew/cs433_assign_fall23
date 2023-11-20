@@ -11,7 +11,9 @@
 
 // Define the data type of the buffer items
 typedef int buffer_item;
-#include <vector>
+const int buffer_size = 5;
+
+//#include <vector>
 #include <mutex>
 #include <condition_variable>
 #include <stdio.h>
@@ -25,14 +27,12 @@ using namespace std;
 class Buffer {
 private:
     // TODO: Add your implementation of the buffer class here
-    vector <buffer_item> buffer;
+    buffer_item buffer[buffer_size];
     int count;
     int size;
-    int in;
-    int out;
-    mutex mtx;
-    condition_variable notFull;
-    condition_variable notEmpty;
+    int front;
+    int last;
+    
 
 
 public:
