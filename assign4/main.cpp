@@ -56,7 +56,21 @@ void *consumer(void *param) {
 
 int main(int argc, char *argv[]) {
     /* TODO: 1. Get command line arguments argv[1],argv[2],argv[3] */
+        if (argc != 4) {
+        cout << "Incorrect variable count, usage is as follows: " << endl;
+        cout << "./prog4 argv[1], argv[2], argv[3]" << endl;
+        exit(1);
+    }
+
     /* TODO: 2. Initialize buffer and synchronization primitives */
+
+    int sleepDuration = atoi(argv[1]);
+    int prodThreadCount = atoi(argv[2]);
+    int consThreadCount = atoi(argv[3]);
+
+    pthread_t = prodThreads;
+    pthread_t = consThreads;
+
     /* TODO: 3. Create producer thread(s).
      * You should pass an unique int ID to each producer thread, starting from 1 to number of threads */
     /* TODO: 4. Create consumer thread(s) */
