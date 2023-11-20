@@ -67,7 +67,7 @@ int Buffer::get_count(){
 }
 
 bool Buffer::is_empty(){
-    return count == 0;
+    return count = 0;
 }
 
 bool Buffer::is_full(){
