@@ -78,7 +78,8 @@ int main(int argc, char *argv[]) {
     /* TODO: 5. Main thread sleep */
     /* TODO: 6. Exit */
     if(argc != 4){
-        cout << "Usage: ./assign4 <sleeptime> <pthreadc> <cthreadc>" << endl;
+        cout << "Invalid number of arguemnts, correct usage is as follows: " << endl;
+        cout << "./assign4 <sleeptime> <pthreadc> <cthreadc>" << endl;
         exit(1);
     }
 
@@ -96,7 +97,7 @@ int main(int argc, char *argv[]) {
     for(int i = 0; i < pThreadc; i++){
         int *arg = new int;
 
-        if(arg = nullptr){
+        if(arg == nullptr){
             cout << "Can't allocate memory" << endl;
             exit(0);
         }
@@ -105,4 +106,14 @@ int main(int argc, char *argv[]) {
 
         pthread_create(&pThreads, &att, producer,(void*) arg);
     }
+
+    for(int i = 0; i < cThreadc; i++)
+    {
+        pthread_create(&cThreads, &att, consumer, NULL);
+    }
+
+    sleep(sleepTime);
+
+    cout << "\n Threads finished! Exiting..." << endl;
+    exit(0);
 }
