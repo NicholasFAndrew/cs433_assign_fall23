@@ -1,7 +1,7 @@
 /**
 * Assignment 4: Producer Consumer Problem
  * @file buffer.h
- * @author ??? (TODO: your name)
+ * @author Julian Rangel & Nick F Andrew
  * @brief header file for the buffer class
  * @version 0.1
  */
@@ -20,13 +20,13 @@ const int buffer_size = 5;
 #include <stdlib.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <unistd.h>
 using namespace std;
 /**
  * @brief The bounded buffer class. The number of items in the buffer cannot exceed the size of the buffer.
  */
 class Buffer {
 private:
-    // TODO: Add your implementation of the buffer class here
     buffer_item buffer[buffer_size];
     int count;
     int size;
