@@ -107,13 +107,13 @@ int main(int argc, char *argv[]) {
         pthread_create(&pThreads, &att, producer,(void*) arg);
     }
 
-    for(int i = 0; i < cThreadc; i++)
-    {
-        pthread_create(&cThreads, &att, consumer, NULL);
+    for(int i = 0; i < cThreadc; i++){
+        pthread_create(&cThreads, &att, consumer, nullptr);
     }
 
     sleep(sleepTime);
 
-    cout << "\n Threads finished! Exiting..." << endl;
+    cout << endl << "Threads Done. Exiting..." << endl;
     exit(0);
+
 }
