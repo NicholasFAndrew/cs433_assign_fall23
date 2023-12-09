@@ -12,7 +12,7 @@
 
 // TODO: Add your implementation here
 LIFOReplacement::LIFOReplacement(int num_pages, int num_frames)
-: Replacement(num_pages, num_frames)
+: Replacement(num_pages, num_frames), lifo_queue()
 {
     // TODO: Add additional implementation code
 }
@@ -20,15 +20,31 @@ LIFOReplacement::LIFOReplacement(int num_pages, int num_frames)
 // TODO: Add your implementations for desctructor, load_page, replace_page here
 LIFOReplacement::~LIFOReplacement() {
     // TODO: Add necessary code here
+    while(!lifo_queue.empty()){
+        lifo_queue.pop_back();
+    }
 }
 
 // Access an invalid page, but free frames are available
 void LIFOReplacement::load_page(int page_num) {
     // TODO: Add necessary code here
+    page_fault++;
+    page_table[page_num].valid = true;
+    lifo_queue.push_back(page_num);
+    page_table[page_num].frame_num = frame_count;
+    frame_count++;
 }
 
 // Access an invalid page and no free frames are available
 int LIFOReplacement::replace_page(int page_num) {
     // TODO: Add necessary code here
+    page_fault++;
+    int back_index = lifo_queue.back();
+    page_table[back_index].valid = false;
+    lifo_queue.erase(lifo_queue.begin());
+    page_table[page_num].valid = true;
+    lifo_queue.push_back(page_num);
+    replaced_page++;
+    
     return 0;
 }
