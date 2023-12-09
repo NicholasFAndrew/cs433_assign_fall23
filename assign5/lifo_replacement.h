@@ -20,6 +20,7 @@
 class LIFOReplacement : public Replacement {
 private:
     // TODO: Add necessary member variables to this class
+    vector <int> lifo_queue;
 
 public:
     /**
