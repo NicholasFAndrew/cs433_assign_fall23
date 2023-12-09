@@ -49,7 +49,9 @@ public:
     ~PageTable();
 
 	// TODO: Add your implementation of the page table here
-
+        vector <PageEntry> page_vector;
+        
+        void insert(int size);
     /**
      * @brief Access a page in the page table.
      * @param i
