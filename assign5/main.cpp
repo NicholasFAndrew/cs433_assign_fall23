@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <vector>
+#include <iomanip>
 
 #include "fifo_replacement.h"
 #include "lru_replacement.h"
@@ -95,14 +96,60 @@ int main(int argc, char *argv[]) {
 
     // Test 2: Read and simulate the large list of logical addresses from the input file "large_refs.txt"
     std::cout << "\n================================Test 2==================================================\n";
+    std::vector <int> large_refs;
+    in.open("large_res.txt");
+    while(in >> val){
+        large_refs.push_back(val);
+    }
+
+    in.close();
+
+    clock_t start, end;
+    double elapsed_time;
 
     std::cout << "****************Simulate FIFO replacement****************************" << std::endl;
     // TODO: Add your code to calculate number of page faults using FIFO replacement algorithm
     // TODO: print the statistics and run-time
+    FIFOReplacement fifo(num_pages, num_frames);
+
+    start = clock();
+
+    for(std::vector <int>::const_iterator it = large_refs.begin(); it != large_refs.end(); ++it){
+        int page_num = (*it) >> page_offset_bits;
+        fifo.access_page(page_num, 0);
+    }
+
+    end = clock();
+    elapsed_time = double(end - start);
+
+    fifo.print_statistics();
+
+    std::cout << "Elapsed Time = " << fixed << elapsed_time << setprecision(5) << std::endl;
+
+    clock_t start1, end1;
+    double elapsed_time1;
 
     std::cout << "****************Simulate LIFO replacement****************************" << std::endl;
     // TODO: Add your code to calculate number of page faults using LIFO replacement algorithm
     // TODO: print the statistics and run-time
+
+    LIFOReplacement lifo(num_pages, num_frames);
+
+    start1 = clock();
+    for(std::vector <int>::const_iterator it = large_refs.begin(); it != large_refs.end(); ++it){
+        int page_num = (*it) >> page_offset_bits;
+        lifo.access_page(page_num, 0);
+    }
+
+    end1 = clock();
+
+    elapsed_time1 = double (end1 - start1);
+
+    lifo.print_statistics();
+    std::cout << "Elapsed Time = " << fixed << elapsed_time1 << setprecision(5) << std::endl;
+
+    clock_t start3, end3;
+    double elapsed_time3;
 
     std::cout << "****************Simulate LRU replacement****************************" << std::endl;
     // TODO: Add your code to calculate number of page faults using LRU replacement algorithm
