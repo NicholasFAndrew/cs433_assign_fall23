@@ -1,16 +1,12 @@
 /**
 * Assignment 5: Page replacement algorithms
  * @file lifo_replacement.h
- * @author ??? (TODO: your name)
+ * @author Julian Rangel & Nick F Andrew
  * @brief A class implementing the LIFO page replacement algorithms
  * @version 0.1
  */
-//You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
-// Remember to add sufficient and clear comments to your code
 
 #pragma once
-
-// Remember to add comments to your code
 
 #include "replacement.h"
 
@@ -19,7 +15,7 @@
  */
 class LIFOReplacement : public Replacement {
 private:
-    // TODO: Add necessary member variables to this class
+    // Create a vector for our lifo_queue
     vector <int> lifo_queue;
 
 public:
