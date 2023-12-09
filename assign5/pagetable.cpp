@@ -14,11 +14,16 @@
 // Constrcutor
 // TODO: Add your code
 PageTable::PageTable(int num_pages) {
-    
+    for(int i = 0; i < num_pages; i++){
+        PageEntry page;
+        pages.push_back(page);
+    }
 }
 
 // Destructor
 // TODO: Add your code
 PageTable::~PageTable() {
-    
+    while(!pages.empty()){
+        pages.pop_back();
+    }
 }
