@@ -20,6 +20,7 @@
 class FIFOReplacement : public Replacement {
 private:
     // TODO: Add necessary member variables to this class
+    vector <int> fifo_queue;
 
 public:
     /**
@@ -50,3 +51,4 @@ public:
     virtual int replace_page(int page_num);
 
 };
+
